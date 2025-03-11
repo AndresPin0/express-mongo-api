@@ -7,6 +7,7 @@ const app: Express = express();
 const port:number = 3000;
 
 app.use(express.urlencoded({extended:true}));
+app.use(express.json());
 app.use("/students", studentRouter);
 
 db.then(()=>{

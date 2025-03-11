@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
 
-const connectionString:string = "mongodb://localhost:27017/yourDBName";
+const connectionString:string = "mongodb://root:example@localhost:27017";
 
-export const db = mongoose.connect(connectionString, {dbName:"compunet03"}).then(()=>{
+export const db = mongoose.connect(connectionString, {dbName:"compunet3"}).then(()=>{
     console.log("Connected to MongoDB");
 }
 ).catch((error)=>{

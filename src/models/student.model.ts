@@ -6,7 +6,10 @@ export interface StudentInput{
     isActive:boolean;
     avg:number;
     email:string;
+    password?:string;
 }
+
+
 
 export interface StudentDocumment extends StudentInput, mongoose.Document, StudentInput{}
 
@@ -17,7 +20,8 @@ const studentSchema = new mongoose.Schema({
     age: {type: Number, required: true},
     isActive: {type: Boolean, required: true},
     avg: {type: Number, required: true},
-    email: {type: String, required: true},
+    email: {type: String, required: true, unique: true},
+    password: {type: String, required: true},
 });
 
 export const StudentModel = mongoose.model<StudentDocumment>('Student', studentSchema);
