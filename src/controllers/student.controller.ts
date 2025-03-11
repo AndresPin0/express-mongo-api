@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { studentService } from "../services/student.service";
-import { StudentModel, StudentDocumment } from "../models/student.model";
+import { StudentModel, StudentDocumment, StudentInput } from "../models/student.model";
 import { securityService } from "../services";
 
 class StudentController{
@@ -38,7 +38,11 @@ class StudentController{
     async update(req: Request, res: Response){
         try {
             const email: string = req.params.email;
-            const student: StudentDocumment | null = await studentService.findByEmail(email);
+            const student: StudentDocumment | null = await studentService.update(email, req.body as StudentInput);
+            if(student === null){
+                res.status(404).json({message: `The student ${req.body.email} doesn't exist`});
+            }
+            res.json(student);
         } catch (error){
             res.status(500).json({message: `Internal server error: The student ${req.body.email} hasn't been updated`});
         }
