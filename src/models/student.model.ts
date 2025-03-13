@@ -1,12 +1,15 @@
 import mongoose from 'mongoose';
 
+export type UserRole = 'student' | 'admin' | 'teacher';
+
 export interface StudentInput{
     name:string;
     age:number;
     isActive:boolean;
     avg:number;
     email:string;
-    password?:string;
+    password:string;
+    role:UserRole;
 }
 
 
@@ -22,6 +25,7 @@ const studentSchema = new mongoose.Schema({
     avg: {type: Number, required: true},
     email: {type: String, required: true, unique: true},
     password: {type: String, required: true},
+    role: {type: String, required: true}
 });
 
 export const StudentModel = mongoose.model<StudentDocumment>('Student', studentSchema);

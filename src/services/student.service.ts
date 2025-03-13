@@ -1,4 +1,5 @@
 import { StudentDocumment, StudentInput, StudentModel } from "../models/student.model";
+import { securityService } from "./security.service";
 
 class StudentService{
 
@@ -31,7 +32,6 @@ class StudentService{
 
     async update(email: string, data: StudentInput){
         try {
-            delete data.password;
             const student: StudentDocumment | null = await StudentModel.findOneAndUpdate
             ({email: email}, data, {returnOriginal: false});
             if(student){

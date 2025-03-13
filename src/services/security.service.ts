@@ -9,10 +9,16 @@ class SecurityService{
         return await bcrypt.hash(password, 10);
     }
 
-    generateToken(_id: mongoose.Types.ObjectId, email: string){
-        return jwt.sign({_id, email}, 'secretKey', {expiresIn: '1h'});
+    async generateToken(_id: mongoose.Types.ObjectId, email: string){
+        return await jwt.sign({_id, email}, 'secretKey', {expiresIn: '1h'});
     }
 
+    //Para qué sirve el async? Sirve para que la función se ejecute de manera asíncrona, es decir, que no se detenga el flujo de ejecución del programa.
+    //Para qué sirve el await? Sirve para esperar a que una promesa se resuelva. En este caso, se espera a que se resuelva la promesa que retorna la función bcrypt.hash.
+
+    async comparePasswords(password: string, currentPassword: string){
+        return await bcrypt.compare(password, currentPassword);
+    }
 }
 
 export const securityService = new SecurityService();
