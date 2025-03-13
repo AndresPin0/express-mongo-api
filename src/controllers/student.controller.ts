@@ -70,7 +70,7 @@ class StudentController{
                 if (!isPasswordCorrect) {
                     res.status(400).json(`user or password incorrect`);
                 }else{
-                    const token = await securityService.generateToken(student.id, student.email);
+                    const token = await securityService.generateToken(student.id, student.email, student.role);
                     res.json({message: `login success, welcome ${student.name}`,
                         token: token});
                 }
